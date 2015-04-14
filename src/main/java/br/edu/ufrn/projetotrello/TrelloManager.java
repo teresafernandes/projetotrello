@@ -23,6 +23,10 @@ public class TrelloManager {
 		trelloApi = new TrelloImpl(key, null);
 	}
 	
+	public void printBoardsAchieved(String idOrganization){
+		
+	}
+	
 	/** 
 	 * Imprime o nome da organização passada como parâmetro
 	 * @param orgName
@@ -51,7 +55,7 @@ public class TrelloManager {
 	public void printBoard(String idBoard){ 
 		Board board = trelloApi.getBoard(idBoard);
 		if(board != null){
-			System.out.println("BOARD NAME: "+board.getName());
+			System.out.println("BOARD NAME: "+board.getName()+" "+board.getId());
 			printListsFromBoard(idBoard);
 		}else{
 			System.out.println("Public board didn't found by this id.");
@@ -82,7 +86,8 @@ public class TrelloManager {
 		if(cards != null && cards.size() > 0){
 			System.out.println("\t\tCARDS: ");
 			for(Card c : cards){
-				System.out.println("\t\t"+c.getName()+", "+getCreationDateOfCard(c.getId()));
+				c.getAttachments();
+				System.out.println("\t\t"+c.getName()+", "+getCreationDateOfCard(c.getId())+", "+c.isClosed());
 			}
 		}
 	}
